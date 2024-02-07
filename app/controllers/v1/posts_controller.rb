@@ -14,12 +14,12 @@ module V1
     end
 
     def create
-      @post = Post.create(create_params)
+      post = ::Interactors::CreatePost.new(post_repo: post_repo).execute(create_params)
 
       # Publish post data
-      Publisher.publish('posts', @post.attributes)
+      # Publisher.publish('posts', post.attributes)
 
-      render json: @post, status: :created
+      render json: post, status: :created
     rescue ActiveRecord::RecordInvalid => e
       render json: e.record.errors, status: :not_found
     end
@@ -40,6 +40,10 @@ module V1
 
     def create_params
       params.require(:post).permit(:title, :body)
+    end
+
+    def post_repo
+      ::Repositories::PostRepository.new
     end
   end
 end

@@ -56,3 +56,6 @@ gem 'dotenv-rails', require: 'dotenv/load'
 # Rabbitmq
 gem 'amqp-client', '~> 1.1.4'
 gem 'bunny', '~> 2.19.0'
+
+# Dry Struct
+gem 'dry-struct'
