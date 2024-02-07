@@ -1,0 +1,24 @@
+services:
+  database:
+    image: postgres:13.13
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+  blog-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bundle exec rails s -b '0.0.0.0' -p 3000
+    volumes:
+      - .:/blog-api
+    environment:
+      DB_HOST: database
+      DB_NAME: blog_api_development
+      DB_USERNAME: postgres
+      DB_PASSWORD: abc,123
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
