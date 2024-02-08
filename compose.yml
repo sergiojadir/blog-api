@@ -16,7 +16,7 @@ services:
     environment:
       DB_HOST: database
       DB_NAME: blog_api_development
-      DB_USERNAME: postgres
+      DB_USER: postgres
       DB_PASSWORD: abc,123
     ports:
       - 3000:3000
